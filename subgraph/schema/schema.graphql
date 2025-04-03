@@ -1,0 +1,48 @@
+type User @entity {
+  id: ID! # user address
+  tokenBalance: BigInt!
+  stakedAmount: BigInt!
+  totalRewardsClaimed: BigInt!
+  lastRewardClaimed: BigInt!
+  stakedAt: BigInt
+  stakingActivities: [StakingActivity!]! @derivedFrom(field: "user")
+  tokenTransfers: [Transfer!]! @derivedFrom(field: "from")
+  tokenReceives: [Transfer!]! @derivedFrom(field: "to")
+}
+
+type StakingActivity @entity {
+  id: ID!
+  user: User!
+  type: String! # "STAKE", "WITHDRAW", "CLAIM"
+  amount: BigInt!
+  timestamp: BigInt!
+  transaction: Transaction!
+}
+
+type Transfer @entity {
+  id: ID!
+  from: User
+  to: User
+  amount: BigInt!
+  timestamp: BigInt!
+  transaction: Transaction!
+}
+
+type GlobalStats @entity {
+  id: ID!
+  totalTokenSupply: BigInt!
+  totalStaked: BigInt!
+  totalRewardsPaid: BigInt!
+  stakingContractAddress: String!
+  tokenContractAddress: String!
+  rewardRate: BigInt!
+  updatedAt: BigInt!
+}
+
+type Transaction @entity {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  transfers: [Transfer!]! @derivedFrom(field: "transaction")
+  stakingActivities: [StakingActivity!]! @derivedFrom(field: "transaction")
+}

@@ -1,0 +1,17 @@
+{
+  "name": "phantom-subgraph",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ phantom-subgraph",
+    "create-local": "graph create --node http://localhost:8020/ phantom-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ phantom-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 phantom-subgraph"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.59.0",
+    "@graphprotocol/graph-ts": "0.29.1"
+  }
+}
